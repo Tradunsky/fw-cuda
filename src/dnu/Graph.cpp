@@ -22,16 +22,6 @@ void Graph::readGraphByLine(char* argv) {
 		graphFile >> vname2;
 		graphFile >> thisWeight;
 		addEdge(vname1, vname2, thisWeight);
-//		if (nameToNum.count(vname1) == 0) {
-//			nameToNum[vname1] = N;
-//			weightMap[vname1][vname1] = 0;
-//			N++;
-//		}
-//		if (nameToNum.count(vname2) == 0) {
-//			nameToNum[vname2] = N;
-//			weightMap[vname2][vname2] = 0;
-//			N++;
-//		}
 		weightMap[vname1][vname2] = thisWeight;
 		graphFile >> vname1;
 	}
@@ -151,7 +141,12 @@ Graph::~Graph() {
 }
 
 Graph::Graph(char* fileName) {
-	readGraphByLine(fileName);
+	string filePath = fileName;
+	if (filePath.substr(filePath.find_last_of(".") + 1) == "csv"){
+		readGraphByCsv(fileName);
+	}else{
+		readGraphByLine(fileName);
+	}
 	refreshWeightMatrix();
 }
 //Graph(string csvGraph){}
