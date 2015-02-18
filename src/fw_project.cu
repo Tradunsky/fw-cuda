@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
 }
 
 int runGraph() {
-	char* fileName = "data/14edges.txt";
+	char* fileName = "data/14edges.csv";
 	Graph graph(fileName);
 	int* weightMatrix = graph.toWeightMatrix();
 	int N = graph.getVerticiesCount(); /* Number of vertices*/

@@ -36,6 +36,7 @@ public:
 	string toCsv();
 	string toWeightMatrixCsv();
 	void printWeightMatrix();
+	void clear();
 	~Graph();
 	Graph(char* fileName);
 //	Graph(string csvGraph);

@@ -16,16 +16,19 @@ void Graph::readGraphByLine(char* argv) {
 	int thisWeight; /* weight of the edge just read from file */
 	N = 0; /* number of vertices */
 	graphFile.open(argv);
+	if (graphFile.is_open()) {
+		clear();
 //Read the graph into some maps
-	graphFile >> vname1;
-	while (vname1 != "--END--") {
-		graphFile >> vname2;
-		graphFile >> thisWeight;
-		addEdge(vname1, vname2, thisWeight);
-		weightMap[vname1][vname2] = thisWeight;
 		graphFile >> vname1;
+		while (vname1 != "--END--") {
+			graphFile >> vname2;
+			graphFile >> thisWeight;
+			addEdge(vname1, vname2, thisWeight);
+//			weightMap[vname1][vname2] = thisWeight;
+			graphFile >> vname1;
+		}
+		graphFile.close();
 	}
-	graphFile.close();
 }
 
 int* Graph::refreshWeightMatrix() {
@@ -53,6 +56,7 @@ int* Graph::refreshWeightMatrix() {
 void Graph::readGraphByCsv(char* fileName) {
 	ifstream fs(fileName);
 	if (fs.is_open()) {
+		clear();
 		string line;
 		while (getline(fs, line)) {
 			stringstream linestream(line);
@@ -71,17 +75,23 @@ void Graph::readGraphByCsv(char* fileName) {
 }
 
 void Graph::addEdge(string vName1, string vName2, int weight) {
-	if (nameToNum.count(vName1) == 0) {
+	int countOfName1 = nameToNum.count(vName1);
+	int countOfName2 = nameToNum.count(vName2);
+	if (countOfName1 == 0) {
 		nameToNum[vName1] = N;
 		weightMap[vName1][vName1] = 0;
 		N++;
 	}
-	if (nameToNum.count(vName2) == 0) {
+	if (countOfName2 == 0) {
 		nameToNum[vName2] = N;
 		weightMap[vName2][vName2] = 0;
 		N++;
 	}
 	weightMap[vName1][vName2] = weight;
+//	printf(
+//			"\nvName1: %s, vName2: %s, weight: %i, countOfName1: %i, countOfName2: %i, N: %i",
+//			vName1.c_str(), vName2.c_str(), weight, countOfName1, countOfName2,
+//			N);
 }
 
 void Graph::printWeightMatrix() {
@@ -142,9 +152,9 @@ Graph::~Graph() {
 
 Graph::Graph(char* fileName) {
 	string filePath = fileName;
-	if (filePath.substr(filePath.find_last_of(".") + 1) == "csv"){
+	if (filePath.substr(filePath.find_last_of(".") + 1) == "csv") {
 		readGraphByCsv(fileName);
-	}else{
+	} else {
 		readGraphByLine(fileName);
 	}
 	refreshWeightMatrix();
@@ -153,4 +163,11 @@ Graph::Graph(char* fileName) {
 
 int* Graph::toWeightMatrix() {
 	return weightMatrix;
+}
+
+void Graph::clear() {
+	N = 0;
+	Na = 0;
+	nameToNum.clear();
+	weightMap.clear();
 }
