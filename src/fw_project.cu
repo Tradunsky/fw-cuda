@@ -71,12 +71,14 @@ int main(int argc, char* argv[]) {
 }
 
 int runGraph() {
-	char* fileName = "data/14edges.csv";
-	Graph graph(fileName);
+	char* textFilePath = "data/14edges.txt";
+	char* csvFilePath = "data/14edges.csv";
+	Graph graph(textFilePath);
+//	graph.readFromCsvFile(csvFilePath);
 	int* weightMatrix = graph.toWeightMatrix();
 	int N = graph.getVerticiesCount(); /* Number of vertices*/
 	int Na = graph.getWeightMatrixWidth(); /* Width of matrix to encourage coalescing */
-	printf("Kernel: Just read %s with %d vertices, Na = %d\n", fileName, N, Na);
+	printf("Kernel: Just read %s with %d vertices, Na = %d\n", textFilePath, N, Na);
 	// Copy the array to newly-allocated global memory
 	int* devArray;
 	cudaError_t err = cudaMalloc(&devArray, Na * N * sizeof(int));

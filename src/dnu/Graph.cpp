@@ -20,7 +20,7 @@ void Graph::readGraphByLine(char* argv) {
 		clear();
 //Read the graph into some maps
 		graphFile >> vname1;
-		while (vname1 != "--END--") {
+		while (!graphFile.eof() && vname1 != "--END--") {
 			graphFile >> vname2;
 			graphFile >> thisWeight;
 			addEdge(vname1, vname2, thisWeight);
@@ -32,9 +32,13 @@ void Graph::readGraphByLine(char* argv) {
 }
 
 int* Graph::refreshWeightMatrix() {
-	N = nameToNum.size();
+//	N = nameToNum.size();
 	// "alignment" is what stored row sizes must be a multiple of
 	Na = ALIGNMENT * ((N + ALIGNMENT - 1) / ALIGNMENT); /* for the sizes of our arrays */
+	if (NULL != weightMatrix) {
+		delete[] weightMatrix;
+		weightMatrix = NULL;
+	}
 	// Build the array
 	weightMatrix = new int[N * Na];
 	for (int ii = 0; ii < N; ii++)
@@ -59,19 +63,19 @@ void Graph::readGraphByCsv(char* fileName) {
 		clear();
 		string line;
 		while (getline(fs, line)) {
-			stringstream linestream(line);
-			string vname1, vname2, weight;
-			while (getline(linestream, vname1, ',') != NULL) {
-				getline(linestream, vname2, ',');
-				getline(linestream, weight, ',');
-				int thisWeight = atoi(weight.c_str());
-				//assign map of edges...
-				addEdge(vname1, vname2, thisWeight);
-			}
+			addCsvGraph(line);
 		}
-
 		fs.close();
 	}
+}
+
+void Graph::readFromTextFile(char* filePath) {
+	readGraphByLine(filePath);
+	refreshWeightMatrix();
+}
+void Graph::readFromCsvFile(char* filePath) {
+	readGraphByCsv(filePath);
+	refreshWeightMatrix();
 }
 
 void Graph::addEdge(string vName1, string vName2, int weight) {
@@ -92,6 +96,18 @@ void Graph::addEdge(string vName1, string vName2, int weight) {
 //			"\nvName1: %s, vName2: %s, weight: %i, countOfName1: %i, countOfName2: %i, N: %i",
 //			vName1.c_str(), vName2.c_str(), weight, countOfName1, countOfName2,
 //			N);
+}
+
+void Graph::addCsvGraph(string line) {
+	stringstream linestream(line);
+	string vname1, vname2, weight;
+	while (getline(linestream, vname1, ',') != NULL) {
+		getline(linestream, vname2, ',');
+		getline(linestream, weight, ',');
+		int thisWeight = atoi(weight.c_str());
+		//assign map of edges...
+		addEdge(vname1, vname2, thisWeight);
+	}
 }
 
 void Graph::printWeightMatrix() {
@@ -147,7 +163,7 @@ string Graph::toWeightMatrixCsv() {
 }
 
 Graph::~Graph() {
-	delete[] weightMatrix;
+	clear();
 }
 
 Graph::Graph(char* fileName) {
@@ -159,7 +175,9 @@ Graph::Graph(char* fileName) {
 	}
 	refreshWeightMatrix();
 }
-//Graph(string csvGraph){}
+Graph::Graph(string csvGraph) {
+	addCsvGraph(csvGraph);
+}
 
 int* Graph::toWeightMatrix() {
 	return weightMatrix;
@@ -168,6 +186,12 @@ int* Graph::toWeightMatrix() {
 void Graph::clear() {
 	N = 0;
 	Na = 0;
-	nameToNum.clear();
-	weightMap.clear();
+	if (!nameToNum.empty())
+		nameToNum.clear();
+	if (!weightMap.empty())
+		weightMap.clear();
+	if (NULL != weightMatrix) {
+		delete[] weightMatrix;
+		weightMatrix = NULL;
+	}
 }

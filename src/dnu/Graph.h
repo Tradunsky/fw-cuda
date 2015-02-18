@@ -24,12 +24,13 @@ private:
 	map<string, int> nameToNum;
 	map<string, map<string, int> > weightMap;
 	int N, Na;
-	int* weightMatrix;
+	int* weightMatrix = NULL;
 	void readGraphByLine(char* fileName);
 	void readGraphByCsv(char* fileName);
 	int* refreshWeightMatrix();
 public:
 	void addEdge(string vName1, string vName2, int weight);
+	void addCsvGraph(string line);
 	int* toWeightMatrix();
 	int getVerticiesCount();
 	int getWeightMatrixWidth();
@@ -37,9 +38,12 @@ public:
 	string toWeightMatrixCsv();
 	void printWeightMatrix();
 	void clear();
+	void readFromTextFile(char* filePath);
+	void readFromCsvFile(char* filePath);
 	~Graph();
 	Graph(char* fileName);
-//	Graph(string csvGraph);
+	Graph(){};
+	Graph(string csvGraph);
 };
 
 #endif /* GRAPH_H_ */
