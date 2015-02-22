@@ -103,8 +103,8 @@ string floydWarshallGpu(string filePath) {
 			cudaMemcpy(hostWeightMatrix, deviceWeightMatrix, weightMatrixSize,
 					cudaMemcpyDeviceToHost));
 
-	bool matrixIsSame = matrixIsEquals(hostWeightMatrix, graph.toWeightMatrix(), verticeCount, matrixWidth);
-	printf("\nGPU weight matrix is the same as graph weight matrix: %s", matrixIsSame?"true":"false");
+//	bool matrixIsSame = matrixIsEquals(hostWeightMatrix, graph.toWeightMatrix(), verticeCount, matrixWidth);
+//	printf("\nGPU weight matrix is the same as graph weight matrix: %s", matrixIsSame?"true":"false");
 
 	string csvWieghtMatrix = graph.toWeightMatrixCsv();
 	CUDA_CHECK_RETURN(cudaFree(deviceWeightMatrix));
@@ -147,7 +147,7 @@ string floydWarshallCpu(string filePath) {
 			}
 		}
 	}
-	bool matrixIsSame = matrixIsEquals(weightMatrix, graph.toWeightMatrix(), verticeCount, weightMatrixWidth);
-	printf("\nCPU weight matrix is the same as graph weight matrix: %s", matrixIsSame?"true":"false");
+//	bool matrixIsSame = matrixIsEquals(weightMatrix, graph.toWeightMatrix(), verticeCount, weightMatrixWidth);
+//	printf("\nCPU weight matrix is the same as graph weight matrix: %s", matrixIsSame?"true":"false");
 	return graph.toWeightMatrixCsv();
 }
