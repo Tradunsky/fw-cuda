@@ -1,4 +1,6 @@
 #include "floyd_warshall.h"
+#include "logger/Logger.h"
+
 /**
  * This macro checks return value of the CUDA runtime call and exits
  * the application if the call failed.
@@ -66,11 +68,15 @@ Graph readGraph(string filePath) {
 	const char* fileName = filePath.c_str();
 	string fileExtension = filePath.substr(filePath.find_last_of(".") + 1);
 	if (fileExtension == "csv") {
+//		Logger::LOG(Level::INFO, "Reading graph from csv file: %s", fileName);
+		INFO("Reading graph from csv file: %s", fileName);
 		graph.readFromCsvFile(fileName);
 	} else if (fileExtension == "txt") {
+		INFO("Reading graph from txt file: %s", fileName);
 		graph.readFromTextFile(fileName);
 	} else {
 		//it's csv graph
+		INFO("Reading graph by csv string: %s", fileName);
 		graph.addCsvGraph(filePath);
 	}
 	return graph;
@@ -79,7 +85,7 @@ Graph readGraph(string filePath) {
 
 string floydWarshallGpu(string filePath) {
 	Graph graph = readGraph(filePath);
-	printf("\nOriginal graph csv for GPU: %s", graph.toCsv().c_str());
+	DEBUG("Original graph csv for GPU: %s", graph.toCsv().c_str());
 	int* hostWeightMatrix = graph.toWeightMatrix();
 	int* deviceWeightMatrix;
 	// Number of vertices
@@ -121,7 +127,7 @@ string floydWarshallGpu(string filePath) {
 
 string floydWarshallCpu(string filePath) {
 	Graph graph = readGraph(filePath);
-	printf("\nOriginal graph csv for CPU: %s", graph.toCsv().c_str());
+	DEBUG("Original graph csv for CPU: %s", graph.toCsv().c_str());
 	int verticeCount = graph.getVerticiesCount();
 	int weightMatrixWidth = graph.getWeightMatrixWidth();
 	int* weightMatrix = graph.toWeightMatrix();
