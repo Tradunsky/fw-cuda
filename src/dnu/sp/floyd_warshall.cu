@@ -53,16 +53,15 @@ bool matrixIsEquals(int* matrixA, int* matrixB, int length, int width) {
 	bool isEquals = true;
 	for (int i = 0; i < length && isEquals; i++) {
 		for (int j = 0; j < length && isEquals; j++) {
-			if (matrixA[i*width+j] != matrixB[i*width+j]){
+			if (matrixA[i * width + j] != matrixB[i * width + j]) {
 				isEquals = false;
 			}
 		}
 	}
 	return isEquals;
 }
-//algs
 
-string floydWarshallGpu(string filePath) {
+Graph readGraph(string filePath) {
 	Graph graph;
 	const char* fileName = filePath.c_str();
 	string fileExtension = filePath.substr(filePath.find_last_of(".") + 1);
@@ -72,8 +71,15 @@ string floydWarshallGpu(string filePath) {
 		graph.readFromTextFile(fileName);
 	} else {
 		//it's csv graph
-//		graph.addCsvGraph(filePath);
+		graph.addCsvGraph(filePath);
 	}
+	return graph;
+}
+//algs
+
+string floydWarshallGpu(string filePath) {
+	Graph graph = readGraph(filePath);
+	printf("\nOriginal graph csv for GPU: %s", graph.toCsv().c_str());
 	int* hostWeightMatrix = graph.toWeightMatrix();
 	int* deviceWeightMatrix;
 	// Number of vertices
@@ -98,13 +104,11 @@ string floydWarshallGpu(string filePath) {
 				matrixWidth, verticeCount);
 		CUDA_CHECK_RETURN(cudaThreadSynchronize());
 	}
-	//TODO: copy result to new pointer
+	//TODO: copy result to new pointer.
+	//Result will copy to graph weight matrix...
 	CUDA_CHECK_RETURN(
 			cudaMemcpy(hostWeightMatrix, deviceWeightMatrix, weightMatrixSize,
 					cudaMemcpyDeviceToHost));
-
-//	bool matrixIsSame = matrixIsEquals(hostWeightMatrix, graph.toWeightMatrix(), verticeCount, matrixWidth);
-//	printf("\nGPU weight matrix is the same as graph weight matrix: %s", matrixIsSame?"true":"false");
 
 	string csvWieghtMatrix = graph.toWeightMatrixCsv();
 	CUDA_CHECK_RETURN(cudaFree(deviceWeightMatrix));
@@ -116,17 +120,8 @@ string floydWarshallGpu(string filePath) {
 }
 
 string floydWarshallCpu(string filePath) {
-	Graph graph;
-	const char* fileName = filePath.c_str();
-	string fileExtension = filePath.substr(filePath.find_last_of(".") + 1);
-	if (fileExtension == "csv") {
-		graph.readFromCsvFile(fileName);
-	} else if (fileExtension == "txt") {
-		graph.readFromTextFile(fileName);
-	} else {
-		//it's csv graph
-		//		graph.addCsvGraph(filePath);
-	}
+	Graph graph = readGraph(filePath);
+	printf("\nOriginal graph csv for CPU: %s", graph.toCsv().c_str());
 	int verticeCount = graph.getVerticiesCount();
 	int weightMatrixWidth = graph.getWeightMatrixWidth();
 	int* weightMatrix = graph.toWeightMatrix();

@@ -25,6 +25,7 @@ private:
 	map<string, map<string, int> > weightMap;
 	int N = 0, Na = 0;
 	int* weightMatrix = NULL;
+	bool needRefreshWeightMatrix = false;
 	void readGraphByLine(const char* fileName);
 	void readGraphByCsv(const char* fileName);
 	int* refreshWeightMatrix();
@@ -47,7 +48,6 @@ public:
 		Na = 0;
 //		weightMatrix = NULL;
 	};
-//	Graph(string csvGraph);
 };
 
 #endif /* GRAPH_H_ */

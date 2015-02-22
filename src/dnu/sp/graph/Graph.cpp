@@ -1,10 +1,14 @@
 #include "Graph.h"
 
 int Graph::getVerticiesCount() {
+	if (needRefreshWeightMatrix)
+		refreshWeightMatrix();
 	return N;
 }
 
 int Graph::getWeightMatrixWidth() {
+	if (needRefreshWeightMatrix)
+		refreshWeightMatrix();
 	return Na;
 }
 
@@ -54,6 +58,7 @@ int* Graph::refreshWeightMatrix() {
 			}
 		}
 	}
+	needRefreshWeightMatrix = false;
 	return weightMatrix;
 }
 
@@ -92,10 +97,8 @@ void Graph::addEdge(string vName1, string vName2, int weight) {
 		N++;
 	}
 	weightMap[vName1][vName2] = weight;
-//	printf(
-//			"\nvName1: %s, vName2: %s, weight: %i, countOfName1: %i, countOfName2: %i, N: %i",
-//			vName1.c_str(), vName2.c_str(), weight, countOfName1, countOfName2,
-//			N);
+	if (!needRefreshWeightMatrix)
+		needRefreshWeightMatrix = true;
 }
 
 void Graph::addCsvGraph(string line) {
@@ -183,6 +186,8 @@ Graph::Graph(string filePath) {
 //}
 
 int* Graph::toWeightMatrix() {
+	if (needRefreshWeightMatrix)
+		refreshWeightMatrix();
 	return weightMatrix;
 }
 
