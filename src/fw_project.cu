@@ -25,11 +25,13 @@ int main(int argc, char* argv[]) {
 //	INFO("Weight matrix csv from GPU: %s", shortnessPathGpuCsv.c_str());
 //	INFO("Weight matrix csv from CPU: %s", shortnessPathCpuCsv.c_str());
 	INFO("GPU and CPU solutions are the same: %s", (shortnessPathCpuCsv.compare(shortnessPathGpuCsv)==0)?"true":"false");
-	clock_t gpuExecutionTime = gpuTime2 - gpuTime1;
-	clock_t cpuExecutionTime = cpuTime2 - cpuTime1;
+//	clock_t gpuExecutionTime = gpuTime2 - gpuTime1;
+	double gpuSec = ((double)gpuTime2-gpuTime1)/CLOCKS_PER_SEC;
+//	clock_t cpuExecutionTime = cpuTime2 - cpuTime1;
+	double cpuSec = ((double)cpuTime2-cpuTime1)/CLOCKS_PER_SEC;
 //	cout<<endl<<"GPU time: "<<double(gpuExecutionTime)/CLOCKS_PER_SEC<<endl;
-	INFO("GPU execution time: %ju ms", gpuExecutionTime);
-	INFO("CPU execution time: %ju ms", cpuExecutionTime);
-	INFO("The difference between GPU and CPU is %ju", (cpuExecutionTime - gpuExecutionTime));
+	INFO("GPU execution time: %f sec", gpuSec);
+	INFO("CPU execution time: %f sec", cpuSec);
+	INFO("The difference between GPU and CPU is %f sec", (cpuSec - gpuSec));
 	return 0;
 }

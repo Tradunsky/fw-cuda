@@ -23,6 +23,10 @@ using namespace std;
 	Logger::LOG(Level::INFO, __FILE__, __LINE__, message, args);			\
 }
 
+#define INFO2(message, args, args2) {											    \
+	Logger::LOG(Level::INFO, __FILE__, __LINE__, message, args, args2);			\
+}
+
 #define DEBUG(message, args) {											    \
 	Logger::LOG(Level::DEBUG, __FILE__, __LINE__, message, args);			\
 }
