@@ -16,10 +16,20 @@ int main(int argc, char* argv[]) {
 	string graphCsv = "A,A,0,A,B,4,A,D,5,A,E,5,B,B,0,B,C,7,B,D,3,C,C,0,C,F,4,D,A,7,D,C,3,D,D,0,D,E,4,D,F,3,E,A,2,E,D,6,E,E,0,F,D,2,F,E,1,F,F,0";
 	string csvFilePath = "data/14edges.csv";
 	string txt1000FilePath = "data/avias.txt";
-	string shortnessPathGpuCsv = floydWarshallGpu(csvFilePath);
-	string shortnessPathCpuCsv = floydWarshallCpu(csvFilePath);
-	INFO("Weight matrix csv from GPU: %s", shortnessPathGpuCsv.c_str());
-	INFO("Weight matrix csv from CPU: %s", shortnessPathCpuCsv.c_str());
+	clock_t gpuTime1=clock();
+	string shortnessPathGpuCsv = floydWarshallGpu(txt1000FilePath);
+	clock_t gpuTime2=clock();
+	clock_t cpuTime1=clock();
+	string shortnessPathCpuCsv = floydWarshallCpu(txt1000FilePath);
+	clock_t cpuTime2=clock();
+//	INFO("Weight matrix csv from GPU: %s", shortnessPathGpuCsv.c_str());
+//	INFO("Weight matrix csv from CPU: %s", shortnessPathCpuCsv.c_str());
 	INFO("GPU and CPU solutions are the same: %s", (shortnessPathCpuCsv.compare(shortnessPathGpuCsv)==0)?"true":"false");
+	clock_t gpuExecutionTime = gpuTime2 - gpuTime1;
+	clock_t cpuExecutionTime = cpuTime2 - cpuTime1;
+//	cout<<endl<<"GPU time: "<<double(gpuExecutionTime)/CLOCKS_PER_SEC<<endl;
+	INFO("GPU execution time: %ju ms", gpuExecutionTime);
+	INFO("CPU execution time: %ju ms", cpuExecutionTime);
+	INFO("The difference between GPU and CPU is %ju", (cpuExecutionTime - gpuExecutionTime));
 	return 0;
 }
