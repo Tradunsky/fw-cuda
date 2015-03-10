@@ -163,16 +163,21 @@ string Graph::toCsv() {
 }
 
 string Graph::toWeightMatrixCsv() {
-	map<string, int>::iterator i, j;
+	map<string, int>::iterator i, j, prevLast = --nameToNum.end();
 	stringstream sstm;
 	for (i = nameToNum.begin(); i != nameToNum.end(); ++i) {
 		for (j = nameToNum.begin(); j != nameToNum.end(); ++j) {
 			int distance = weightMatrix[i->second * Na + j->second];
 			sstm << i->first << "," << j->first << ",";
-			if (distance != INT_MAX)
-				sstm << distance << ",";
-			else
-				sstm << "inf,";
+			if (distance != INT_MAX){
+				sstm << distance;
+			}
+			else{
+				sstm << "inf";
+			}
+			if (j != prevLast || i != prevLast){							
+				sstm << ",";
+			}
 		}
 	}
 	return sstm.str();

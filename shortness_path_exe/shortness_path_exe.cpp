@@ -26,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[]){
 	clock_t cpuTime2 = clock();
 	double cpuSec = ((double)cpuTime2 - cpuTime1) / CLOCKS_PER_SEC;	
 
-	//cout << "Weight matrix csv from GPU: " << shortnessPathGpuCsv;
+	cout << endl <<"Weight matrix csv from GPU: " << shortnessPathGpuCsv;
 	//cout << "Weight matrix csv from CPU: " << shortnessPathCpuCsv;
 	cout << endl << "GPU execution time: " << gpuSec << " sec.";
 	cout << endl << "CPU execution time: " << cpuSec << " sec.";
