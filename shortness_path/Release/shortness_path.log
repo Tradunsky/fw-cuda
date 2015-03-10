@@ -1,0 +1,23 @@
+﻿  
+  C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"     --keep-dir Release -maxrregcount=0  --machine 32 --compile      -DWIN32 -DNDEBUG -D_WINDOWS -D_USRDLL -DSHORTNESS_PATH_EXPORTS -D_WINDLL -D_UNICODE -DUNICODE -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD  " -o Release\shortness_path.cu.obj "C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path\shortness_path.cu" -clean 
+  shortness_path.cu
+  Compiling CUDA source file shortness_path.cu...
+  
+  C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"     --keep-dir Release -maxrregcount=0  --machine 32 --compile -cudart static     -DWIN32 -DNDEBUG -D_WINDOWS -D_USRDLL -DSHORTNESS_PATH_EXPORTS -D_WINDLL -D_UNICODE -DUNICODE -Xcompiler "/EHsc /W3 /nologo /O2 /Zi  /MD  " -o Release\shortness_path.cu.obj "C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path\shortness_path.cu" 
+  shortness_path.cu
+  stdafx.cpp
+  dllmain.cpp
+  Graph.cpp
+     Creating library C:\dnu\diploma\code\fw-cuda-dll\shortness_path\Release\shortness_path.lib and object C:\dnu\diploma\code\fw-cuda-dll\shortness_path\Release\shortness_path.exp
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaGetErrorString@4
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaFree@4
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaMalloc@8
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaThreadSynchronize@0
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaConfigureCall@32
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaSetupArgument@12
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaLaunch@4
+shortness_path.cu.obj : error LNK2001: unresolved external symbol _cudaMemcpy@16
+shortness_path.cu.obj : error LNK2001: unresolved external symbol ___cudaRegisterFatBinary@4
+shortness_path.cu.obj : error LNK2001: unresolved external symbol ___cudaUnregisterFatBinary@4
+shortness_path.cu.obj : error LNK2001: unresolved external symbol ___cudaRegisterFunction@40
+C:\dnu\diploma\code\fw-cuda-dll\shortness_path\Release\shortness_path.dll : fatal error LNK1120: 11 unresolved externals

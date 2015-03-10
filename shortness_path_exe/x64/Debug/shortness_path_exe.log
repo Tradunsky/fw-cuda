@@ -1,0 +1,3 @@
+﻿  stdafx.cpp
+  shortness_path_exe.cpp
+shortness_path.lib(shortness_path.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'

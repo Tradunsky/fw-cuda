@@ -1,0 +1,14 @@
+﻿  
+  C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile   -g   -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DSHORTNESS_PATH_EXPORTS -D_WINDLL -D_UNICODE -DUNICODE -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o x64\Debug\shortness_path.cu.obj "C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path\shortness_path.cu" -clean 
+  shortness_path.cu
+  Compiling CUDA source file shortness_path.cu...
+  
+  C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart shared  -g   -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DSHORTNESS_PATH_EXPORTS -D_WINDLL -D_UNICODE -DUNICODE -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MDd  " -o x64\Debug\shortness_path.cu.obj "C:\dnu\diploma\code\fw-cuda-dll\shortness_path\shortness_path\shortness_path.cu" 
+  shortness_path.cu
+  stdafx.cpp
+  dllmain.cpp
+  Graph.cpp
+Graph.cpp(100): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+Graph.cpp(101): warning C4267: 'initializing' : conversion from 'size_t' to 'int', possible loss of data
+     Creating library C:\dnu\diploma\code\fw-cuda-dll\shortness_path\x64\Debug\shortness_path.lib and object C:\dnu\diploma\code\fw-cuda-dll\shortness_path\x64\Debug\shortness_path.exp
+  shortness_path.vcxproj -> C:\dnu\diploma\code\fw-cuda-dll\shortness_path\x64\Debug\shortness_path.dll
