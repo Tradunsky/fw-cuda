@@ -1,0 +1,16 @@
+﻿  
+  C:\dnu\diploma\code\dll_hw\cppobjs\Source\VC++\IConsoleDLLVCpp>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile   -g   -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DICONSOLEDLLVCPP_EXPORTS -D_WINDLL -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MTd  " -o Debug\shortness_path.cu.obj "C:\dnu\diploma\code\dll_hw\cppobjs\Source\VC++\IConsoleDLLVCpp\shortness_path.cu" -clean 
+  shortness_path.cu
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(364,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Compiling CUDA source file shortness_path.cu...
+  
+  C:\dnu\diploma\code\dll_hw\cppobjs\Source\VC++\IConsoleDLLVCpp>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\nvcc.exe" -gencode=arch=compute_20,code=\"sm_20,compute_20\" --use-local-env --cl-version 2013 -ccbin "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin"  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\include"  -G   --keep-dir Debug -maxrregcount=0  --machine 32 --compile -cudart static  -g   -DWIN32 -D_DEBUG -D_WINDOWS -D_USRDLL -DICONSOLEDLLVCPP_EXPORTS -D_WINDLL -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Zi /RTC1 /MTd  " -o Debug\shortness_path.cu.obj "C:\dnu\diploma\code\dll_hw\cppobjs\Source\VC++\IConsoleDLLVCpp\shortness_path.cu" 
+  shortness_path.cu
+  stdafx.cpp
+  dllmain.cpp
+  IFloydWarshallDLLVCpp.cpp
+  Graph.cpp
+  Generating Code...
+     Creating library ..\Target\IFloydWarshallDLLVCpp.lib and object ..\Target\IFloydWarshallDLLVCpp.exp
+  IConsoleDLLVCpp.vcxproj -> C:\dnu\diploma\code\dll_hw\cppobjs\Source\VC++\IConsoleDLLVCpp\..\Target\IFloydWarshallDLLVCpp.dll
+  copy "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.5\bin\cudart*.dll" "..\Target\"

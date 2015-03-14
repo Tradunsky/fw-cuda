@@ -1,0 +1,4 @@
+LIBRARY IFloydWarshallDLLVCpp.dll
+
+EXPORTS
+    CreateFloydWarshall
